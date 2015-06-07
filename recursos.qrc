@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>delete.png</file>
+        <file>logo.png</file>
+        <file>yellow.png</file>
+        <file>green.png</file>
+        <file>grey.png</file>
+        <file>red.png</file>
+        <file>PlantillaVentana.qml</file>
+    </qresource>
+</RCC>

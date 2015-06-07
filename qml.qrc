@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Acciones.qml</file>
+        <file>misfunciones.js</file>
+        <file>Grupos.qml</file>
+        <file>EditarGrupos.qml</file>
+        <file>Etiquetas.qml</file>
+        <file>Boton.qml</file>
+        <file>CampoTexto.qml</file>
+        <file>Ventana.qml</file>
+        <file>EditarDispositivo.qml</file>
+        <file>EditarAcc.qml</file>
+        <file>Preferencias.qml</file>
+    </qresource>
+</RCC>
