@@ -39,6 +39,7 @@ Rectangle {
 
     ListView {
         id: listViewRedes
+        clip: true
         anchors.bottomMargin: 56; anchors.topMargin: 50; anchors.fill: parent; anchors.margins: 5
         delegate: listRedesDelegate; focus: true
     }
@@ -135,25 +136,10 @@ Rectangle {
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 16
+        }
 
-            Image {
-                id: imageRedesCerrar
-                anchors.left: parent.left
-                anchors.leftMargin: 8
-                anchors.top: parent.top
-                anchors.topMargin: 8
-                source: "delete.png"
-
-                MouseArea{
-                    anchors.fill: parent
-                    id:mouseAreaSalir
-                    x: 122
-                    y: 264
-                    onClicked: {
-                        root.destroy();
-                   }
-                }
-            }
+        BotonCerrar {
+            onClicked: {root.destroy()}
         }
     }
 
@@ -163,12 +149,13 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         onVisibleChanged: {
-            ventanaEdGrupo.z=root.z +1
             FuncPpal.baseQueryListaGrupos();
         }
     }
     CampoTexto{
         id: textInputBuscar
+        y: 464
+        anchors.leftMargin: 92
         placeholderText: qsTr("Buscar...")
         onAccepted:  {
             FuncPpal.baseQueryArgGrupos(textInputBuscar.text)

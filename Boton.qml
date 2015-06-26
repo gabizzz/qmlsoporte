@@ -4,7 +4,9 @@ Rectangle {
     id: recBotonGuardar
     width: 100
     height: 30
-    color: "#1960b8"
+    color: "#428BCA"
+    border.color: "#357EBD"
+    border.width: 1
     radius: 3
     anchors.left: parent.left
     anchors.leftMargin: 111
@@ -12,8 +14,8 @@ Rectangle {
     anchors.rightMargin: 109
     anchors.bottom: parent.bottom
     anchors.bottomMargin: 50
-    //property alias mouseArea: mouseAreaGuardar.pressed
     signal clicked
+
 
     Text {
         id: textGuardar
@@ -31,6 +33,6 @@ Rectangle {
     MouseArea {
         id: mouseAreaGuardar
         anchors.fill: parent
-        onClicked: { recBotonGuardar.clicked(); }
+        onClicked: {recBotonGuardar.clicked()}
     }
 }

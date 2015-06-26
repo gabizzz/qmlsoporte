@@ -10,8 +10,6 @@ Rectangle {
         border.color: "#607D8B"
 
         property alias tituloCabecera: textTitulo.text
-        //property alias mouseAreaSalir: mouseAreaSalir.pressed
-        signal clicked
 
         MouseArea{ //drag window
             anchors.fill: parent
@@ -39,23 +37,6 @@ Rectangle {
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 16
-
-                Image {
-                    id: imgCerrar
-                    anchors.left: parent.left
-                    anchors.leftMargin: 8
-                    anchors.top: parent.top
-                    anchors.topMargin: 8
-                    source: "delete.png"
-
-                    MouseArea{
-                        id:mouseAreaSalir
-                        anchors.fill: parent
-                        onClicked: {
-                            root.clicked();
-                        }
-                    }
-                }
             }
         }
 

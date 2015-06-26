@@ -8,9 +8,10 @@ import "misfunciones.js" as FuncPpal
 Window {
     id: window1
     visible: true
-    width: 600; height: 700
+    width: Screen.width; height: Screen.height
     color: "#151518"
     title: "Rocket Support v0.6"
+
 
     function funcionAccionPPal(argHost,argIP,id,argidred) //llama a ventana lista de acciones si resuelve IP
     {
@@ -33,8 +34,13 @@ Window {
             ipfinal=ipantes;//resuelvo ip por hostname
         }
         idRedtmp=FuncPpal.funcionGetIDRed(ipfinal);
-        if (idRedtmp!==argidred) //si son distintos los id de red actualiza
+
+        console.log(idRedtmp+"--"+ipantes+"****"+ipdespues+"---"+argidred)
+
+
+        if (idRedtmp!==argidred || ipantes!==ipdespues) //si son distintos los id de red actualiza
         {
+            console.log("cambio la ip")
             FuncPpal.baseQueryUpdatePPal(ipfinal,id,idRedtmp)
         }
         if(ipdespues!=="no ip address")
@@ -120,10 +126,11 @@ Window {
                                 Repeater {
                                     model: FuncPpal.divideEtiqueta(id) //aca tiene que devolver catidad de etiquetas por item
                                     Rectangle {
+                                        id: laetiquetita
                                         anchors.verticalCenter: parent.verticalCenter;
-                                        color: "#b3a60241"
-                                        width: texetiq.width+5; height: texetiq.height+5
-                                        Text {id:texetiq; color:"#F8BBD0";text: FuncPpal.laetiqueta(index,id).toUpperCase();fontSizeMode: Text.Fit; minimumPixelSize: 8; font.pixelSize: 12;anchors.centerIn: parent }
+                                        color: FuncPpal.coloretiqueta(index,id); radius: 3
+                                        width: texetiq.width+5; height: texetiq.height+2
+                                        Text {id:texetiq; color:FuncPpal.colortextoetiqueta(index,id);text: FuncPpal.laetiqueta(index,id).toUpperCase();fontSizeMode: Text.Fit; minimumPixelSize: 8; font.pixelSize: 12;anchors.centerIn: parent }
                                     }
                                 }
                          //------------------
@@ -143,10 +150,11 @@ Rectangle {
     CampoTexto{
         id: textInputBuscar
         placeholderText: qsTr("Buscar...")
-        onAccepted:  {
+        onDisplayTextChanged: {
             rectangleMensajes.visible=false
             FuncPpal.baseQueryPPal(textInputBuscar.text)
         }
+        onAccepted: {FuncPpal.baseQueryPPal(textInputBuscar.text)}
     }
 
     Text {
@@ -199,6 +207,7 @@ Rectangle {
 
     ListView {
         id: listView
+        clip: true
         anchors.bottomMargin: 47; anchors.topMargin: 38
         anchors.fill: parent; delegate: listDelegate
         highlight: highlightBar; highlightMoveDuration :0
@@ -223,6 +232,7 @@ Rectangle {
                 }
             }
         }
+        onCountChanged: {textCantdispositivos.text=listView.count}
     }
 
 
@@ -313,6 +323,17 @@ Rectangle {
             anchors.top: parent.top
             anchors.topMargin: 10
             verticalAlignment: Text.AlignVCenter
+            font.pixelSize: 12
+        }
+
+        Text {
+            id: textCantdispositivos
+            x: 788
+            color: "#727272"
+            text: qsTr("")
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: 10
             font.pixelSize: 12
         }
     }

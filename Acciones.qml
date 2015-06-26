@@ -20,7 +20,20 @@ Rectangle {
     }
 
     property var mihostnameAcc
-    property alias resultLabel: resultLabel
+    property alias resultLabel: resultLabel.text
+
+    function contraeVista()
+    {
+        if (botonVista.textX==="-"){
+            root.height=43
+            resultLabel.visible=false
+            botonVista.textX="+"
+        }else{
+            root.height=500
+            resultLabel.visible=true
+            botonVista.textX="-"
+        }
+    }
 
     function editaAccion(argNserv,argParams,argUbic,argId)
     {
@@ -43,7 +56,8 @@ Rectangle {
 
     ListView {
         id: listViewVAcciones
-        anchors.bottomMargin: 214
+        clip: true
+        anchors.bottomMargin: 209
         anchors.topMargin: 50
         anchors.fill: parent; anchors.margins: 5
         delegate: listAccDelegate
@@ -87,7 +101,6 @@ Rectangle {
                               var comando = ubicacion+" "+res.replace(/,/gi," ")//global insensitive
                               process.command=comando
                               process.start();
-
                          }
                    }
                 }
@@ -111,32 +124,36 @@ Rectangle {
         }
 
 
-    Rectangle {
-        id: rectangleFondoCerrar
-        y: 259
-        height: 200
-        color: "#b3000000"
-        radius: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 8
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        anchors.right: parent.right
-        anchors.rightMargin: 5
+BotonCerrar {
+    id: botonVista
+    x: 38
+    y: 8
+    z: 1
+    textX: "-"
+    onClicked: {contraeVista()}
+}
 
-        Text {
-            id: resultLabel
-            color: "#cfb411"
-            x: 8
-            y: 10
-            width: 294
-            height: 182
-            text: qsTr("Salida Consola...")
-            textFormat: Text.AutoText
-            wrapMode: Text.WordWrap
-            font.pixelSize: 10
-        }
-    }
+BotonCerrar {
+    id: botonCerrarAccion
+    x: 5
+    y: 8
+    z: 2
+    onClicked: {root.destroy()}
+}
+
+Text {
+    id: resultLabel
+    color: "#afac99"
+    x: 8
+    width: 304
+    anchors.top: parent.top
+    anchors.topMargin: 302
+    anchors.bottom: parent.bottom
+    anchors.bottomMargin: 16
+    textFormat: Text.AutoText
+    wrapMode: Text.WordWrap
+    font.pixelSize: 10
+}
 
     Rectangle {
         id: rectangleFondoHostname
@@ -158,25 +175,6 @@ Rectangle {
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 16
-
-            Image {
-                id: imageAccCerrar
-                anchors.left: parent.left
-                anchors.leftMargin: 8
-                anchors.top: parent.top
-                anchors.topMargin: 8
-                source: "delete.png"
-
-                MouseArea{
-                    anchors.fill: parent
-                    id:mouseAreaSalir
-                    x: 122
-                    y: 264
-                    onClicked: {
-                        root.destroy();
-                   }
-                }
-            }
         }
     }
 
@@ -188,6 +186,6 @@ Rectangle {
         onVisibleChanged: {
             FuncPpal.baseQueryListaAcciones();
         }
-    }    
+    }
 }
 

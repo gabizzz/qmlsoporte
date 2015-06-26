@@ -11,6 +11,7 @@ function baseQueryPPal(arg) //ventana principal
 
 function baseQueryUpdatePPal(argIP,argID,argIDRed)//ip, id Actualiza equipo de la ppal si cambio IP
 {
+    console.log("actualiza id red "+ argIP)
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1; //January is 0!
@@ -43,19 +44,23 @@ function funcionEliminarPPal(arg) //elimina equipo de la ppal
 function funcionGetIDRed(argIP)
 {
     var str=argIP.slice(0,argIP.lastIndexOf("."));
+    console.log(str)
     queryGetIDRed.setDatabase("equipos.sqlite");
     queryGetIDRed.setQuery("SELECT * FROM enlaces  where direccionip like '%"+str+"%' order by direccionip asc limit 1");
     var idRed=queryGetIDRed.get(0).id;
+    console.log(idRed+"---"+queryGetIDRed.get(0).direccionip)
     if (typeof idRed === 'undefined')
     {
         idRed="12" //Grupo equipos que no responden o ip NaN
     }
+    console.log(idRed)
     return idRed
 }
 
 function funcionAsociaRed(argIP)
 {
     var str=argIP.slice(0,argIP.lastIndexOf("."));
+    console.log(str)
     modelVinGrupo.setDatabase("equipos.sqlite");
     modelVinGrupo.setQuery("SELECT * FROM enlaces  where direccionip like '%"+str+"%' order by direccionip asc limit 1");
     var idRed=modelVinGrupo.get(0).id;
@@ -116,9 +121,11 @@ function mensajeEstadoEdEq(arg) //mensaje ventana
 //************************ACCIONES
 function createObjectsAcc(argHostname) //Creo objeto
 {
+    console.log("acciones#########################"+argHostname)
     var component = Qt.createComponent("Acciones.qml");
     if (component.status === Component.Ready)
     {
+        console.log("acciones#########################")
         component.createObject(window1, {"x": (window1.width/2)-160, "y": 100, "mihostnameAcc": argHostname});
     }
 }
@@ -269,6 +276,18 @@ function divideEtiqueta(id){
 function laetiqueta(argindex,id)
 {
     modeloEtiquetas.setDatabase("equipos.sqlite");
-    modeloEtiquetas.setQuery("SELECT etiquetas.descripcion as eti FROM maquinas inner join rela_maq_etiq on (rela_maq_etiq.idmaq=maquinas.id) inner join etiquetas on (etiquetas.id=rela_maq_etiq.idetq) where maquinas.id='"+id+"'")
-    return modeloEtiquetas.get(argindex).eti
+    modeloEtiquetas.setQuery("SELECT * FROM maquinas inner join rela_maq_etiq on (rela_maq_etiq.idmaq=maquinas.id) inner join etiquetas on (etiquetas.id=rela_maq_etiq.idetq) where maquinas.id='"+id+"'")
+    return modeloEtiquetas.get(argindex).descripcion
+}
+function coloretiqueta(argindex,id)
+{
+    modeloEtiquetas.setDatabase("equipos.sqlite");
+    modeloEtiquetas.setQuery("SELECT * FROM maquinas inner join rela_maq_etiq on (rela_maq_etiq.idmaq=maquinas.id) inner join etiquetas on (etiquetas.id=rela_maq_etiq.idetq) where maquinas.id='"+id+"'")
+    return modeloEtiquetas.get(argindex).colorfondo
+}
+function colortextoetiqueta(argindex,id)
+{
+    modeloEtiquetas.setDatabase("equipos.sqlite");
+    modeloEtiquetas.setQuery("SELECT * FROM maquinas inner join rela_maq_etiq on (rela_maq_etiq.idmaq=maquinas.id) inner join etiquetas on (etiquetas.id=rela_maq_etiq.idetq) where maquinas.id='"+id+"'")
+    return modeloEtiquetas.get(argindex).colortexto
 }

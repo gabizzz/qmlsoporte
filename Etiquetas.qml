@@ -30,10 +30,10 @@ Rectangle {
 
     ListView {
         id: listViewEtiquetas
-        x: 150; width: 143;        anchors.top: parent.top
-        anchors.topMargin: 37
+        x: 150; width: 143; clip: true;        anchors.top: parent.top
+        anchors.topMargin: 23
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 46
+        anchors.bottomMargin: 8
         anchors.right: parent.right
         anchors.rightMargin: 7
         highlight: highlightBar; highlightMoveDuration :0
@@ -57,10 +57,11 @@ Rectangle {
 
     ListView {
         id: listViewRelacion
+        clip: true
         anchors.top: parent.top
-        anchors.topMargin: 37
+        anchors.topMargin: 23
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 46
+        anchors.bottomMargin: 8
         anchors.right: parent.right
         anchors.rightMargin: 156
         anchors.left: parent.left
@@ -84,21 +85,8 @@ Rectangle {
     }
 
     Rectangle {
-        id: footer
-        y: 221
-        height: 29
-        color: "#b3000000"
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-    }
-
-    Rectangle {
         id: header
-        height: 29
+        height: 23
         color: "#b3000000"
         anchors.top: parent.top
         anchors.topMargin: 0
@@ -110,7 +98,7 @@ Rectangle {
         Text {
             id: labels
             x: 124
-            y: 8
+            y: 4
             color: "#6d6464"
             text: qsTr("Etiquetas")
             font.bold: false

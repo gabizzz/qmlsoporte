@@ -24,10 +24,11 @@ Ventana {
         FuncPpal.baseQuerySaveEdEq(textHostname.text,textUserName.text,textIpAddr.text,miidEquipo,textIDRed.text);
     }
 
-    onClicked: {
-        ventanaEdDisp.destroy()
-        if (textEstado.text==="Guardado")
+    BotonCerrar {
+        onClicked: {
+            ventanaEdDisp.destroy()
             FuncPpal.baseQueryPPal(textHostname.text)
+        }
     }
 
     CampoTexto{

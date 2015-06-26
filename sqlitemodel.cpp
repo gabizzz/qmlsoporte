@@ -71,20 +71,19 @@ QVariantMap SQLiteModel::get(int row) const
 
 QVariant SQLiteModel::data(const QModelIndex &index, int role) const
 {
+    QVariant value = QSqlQueryModel::data(index, role);
 
-QVariant value = QSqlQueryModel::data(index, role);
+    if (role < Qt::UserRole){
+        value = QSqlQueryModel::data(index, role);
+    } else {
+        int row = index.row();
+        int col = role - Qt::UserRole - 1;
 
-if (role < Qt::UserRole)
-    value = QSqlQueryModel::data(index, role);
-else {
-    int row = index.row();
-    int col = role - Qt::UserRole - 1;
+        QModelIndex modelIndex = this->index(row, col);
 
-    QModelIndex modelIndex = this->index(row, col);
-
-    value = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
-}
-return value;
+        value = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+    }
+    return value;
 }
 
 void SQLiteModel::declareQML() {

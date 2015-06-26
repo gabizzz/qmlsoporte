@@ -12,5 +12,6 @@
         <file>EditarDispositivo.qml</file>
         <file>EditarAcc.qml</file>
         <file>Preferencias.qml</file>
+        <file>BotonCerrar.qml</file>
     </qresource>
 </RCC>

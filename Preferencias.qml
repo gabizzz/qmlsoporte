@@ -6,7 +6,6 @@ Ventana {
     id: ventanaEdPref
     width: 320; height: 300
     tituloCabecera: "Preferencias"
-    onClicked: {ventanaEdPref.destroy()}
 
     SQLiteModel {id: modelSettings }
 
@@ -46,7 +45,11 @@ Ventana {
     Boton {
         id: botonGuardar
         x: 287; y: 323
-        onClicked: {guardar()}
+        onClicked:  {guardar()}
+    }
+
+    BotonCerrar {
+        onClicked: {ventanaEdPref.destroy()}
     }
 
 }

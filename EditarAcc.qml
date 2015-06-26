@@ -64,7 +64,11 @@ Ventana {
         }
     }
 
-    onClicked: {ventanaEdAcc.visible=false}
+    BotonCerrar{
+        onClicked: {
+            ventanaEdAcc.visible=false
+        }
+    }
 
     Boton {
         id: botonGuardar

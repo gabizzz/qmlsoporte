@@ -5,17 +5,14 @@ import ResolverIPName 1.0
 import "misfunciones.js" as FuncPpal
 import QtWebKit 3.0
 
-Ventana {
+Rectangle {
     id: ventanaEdGrp
     width: 455
     height: 441
-    tituloCabecera: "Grupo"
-    onClicked: {
-        ventanaEdGrp.visible=false
-        if (textEstado.text==="Guardado")
-            FuncPpal.baseQueryListaGrupos()
-    }
-
+    color: "#151518"
+    radius: 2
+    border.width: 2
+    border.color: "#607D8B"
 
     property string miHostnameRed
     property string miIpAddrRed
@@ -35,6 +32,10 @@ Ventana {
         anchors.fill: parent
         drag.target: parent
         drag.axis: Drag.XandYAxis
+    }
+
+    BotonCerrar {
+        onClicked: {ventanaEdGrp.visible=false}
     }
 
     Text {
@@ -120,8 +121,9 @@ Ventana {
         id: botonGuardar
         x: 287
         y: 323
-        onClicked: {
+        onClicked:  {
             guardar()
+           console.log("boton guardar")
         }
     }
 }
